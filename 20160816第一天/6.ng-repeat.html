@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-init="name=['田文','田文','张震','白雪']"></div>
+<!--<div ng-init="name='zfpxz'"></div>-->
+<!--<div ng-init="name={age:8,name:'zfpx'}"></div>-->
+<!--<div ng-repeat="(key,value) in name track by $index">-->
+<!--{{key}}:{{value}}:{{$first}}:{{$last}}:{{$odd}}{{$even}}:{{$index}}-->
+<!--</div>-->
+<ul>
+    <li ng-repeat="(key,value) in name track by $index">
+        {{key}}:{{value}}
+    </li>
+</ul>
+
+<script src="angular.js"></script>
+<script>
+    //  ng-repeat 迭代
+    //  1.可以迭代的内容有字符串，数组，对象
+    //    对象,a in name中的a为value值
+    //    对象(key,value) in name其中的key,value代表的为一个键值对的属性名和属性值
+    //    数组和字符串中(key,value) in name其中的key,value代表的为索引和对应的值
+    // 2.当页面中数据的字符串和数组的时候，出现重复项，页面加载的时候会报错，解决方法是加 track by $index
+    // 3.{{$first}}:{{$last}}:{{$odd}}{{$even}}
+    //    都是boolean类型的值
+    //    {{$first}}判断当前项是不是第一项
+    //    {{$last}}判断当前项是不是最后一项
+    //    {{$odd}}判断当前索引是不是奇数索引
+    //    {{$even}}判断当前索引是不是偶数索引
+    // 4.$index当前项的索引
+    // 5.形成的每一个DOM元素都一个自己的作用域
+    // 6.我们想让哪一个标签创建出新的DOM元素，我们就把ng-repeat放在哪个标签上
+</script>
+</body>
+</html>

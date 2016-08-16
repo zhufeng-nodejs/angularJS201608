@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+
+
+<script src="angular.js"></script>
+<script>
+    //   1.angular.uppercase()或者angular.lowercase()
+    var str = 'abcdASDF';
+    var str1 = angular.uppercase(str);
+    var str2 = angular.lowercase(str);
+    console.log(str1, str2);
+    //    2.angular.equals(value1,value2)相当于原声JS中的 === ,绝对相等的比较
+    //    特殊的NaN和NaN相等
+    var res = angular.equals(NaN, NaN);//==> true
+    var res1 = angular.equals(/^\d+$/, /^\d+$/);//==> true
+    console.log(res, res1);
+    //    3.angular.toJson(相当于JSON.stringify) 和 angular.fromJson(相当于JSON.parse)
+    var obj = {name: 'zfpx'};
+    var obj1 = angular.toJson(obj);
+    console.log(obj1);
+    var obj2 = angular.fromJson(obj1);
+    console.log(obj2);
+    //    4.angular.extend(value1,value2)
+    //    将value2及以后的值继承给value1,value1发生改变,其他值不变
+    var obj3 = {name: 'zfpx'}, obj4 = {age: 8}, obj5 = {math: 8};
+    angular.extend(obj3, obj4, obj5);
+    console.log(obj3, obj4);
+    //  5.angular.copy(value1,value2)
+    //    把value1赋值给value2
+    angular.copy(obj4, obj5);
+    console.log(obj4, obj5);
+
+    //    6.angular.forEach()
+    //    参数1,要遍历的数组,参数2是方法,参数3用来改变this指向;
+    var arr = [{name: 'zhangsan'}, {name: 'lisi'}];
+    var obj6 = {name: 'zfpx'};
+    angular.forEach(arr, function (item, index) {
+        console.log(this.name)
+    }, obj6);
+    //    7.angular.bind()
+    //    参数1,改变this指向,参数2函数体,参数3往后是给函数传递的参数
+    var fn = function (str) {
+        name = str;
+        console.log(this.name);
+    };
+    fn('zhn');
+    var obj7 = {name: 'zfpx'};
+    var newFn = angular.bind(obj7, fn, 'zhn');
+    newFn();
+    //    8.angular.isArray()   angular.isObject()   angular.isNumber()...
+    var res2 = angular.isObject(null);
+    console.log(res2);//===>false
+    //    9.angular.element()
+    //    将原生对象转化为jQuery对象
+
+</script>
+</body>
+</html>

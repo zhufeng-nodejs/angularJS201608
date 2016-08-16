@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div ng-controller="myCtrl1" ng-click="fn()">
+    点击
+    <!--<div ng-controller="myCtrl2">
+        {{name}}
+    </div>-->
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl1', function ($scope) {
+        $scope.name = '白雪';
+        $scope.fn = function () {
+            alert($scope.name)
+        };
+    });
+    myMod.controller('myCtrl2', function ($scope) {
+        $scope.age = 18;
+    });
+
+    // angularJS api的网址 http://docs.ngnice.com/api
+    // bootstrap.css的网址  http://v3.bootcss.com/css/
+    // bootstrap菜鸟教程  http://www.runoob.com/try/bootstrap
+</script>
+</body>
+</html>

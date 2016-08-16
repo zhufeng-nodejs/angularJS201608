@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div ng-init="persons=[{name:'zhangsan',age:18,math:100},{name:'lisi',age:16,math:120},{name:'wangwu',age:20,math:90},{name:'zhaoliu',age:15,math:110}];flag='math';reverse=true"></div>
+
+<input type="text" ng-model="value"/>
+<br/>
+<br/>
+<table class="table table-bordered">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th ng-click="flag='math';reverse=!reverse">数学成绩</th>
+    </tr>
+    <tr ng-repeat="person in persons|filter:value|orderBy:flag:reverse">
+        <td>{{$index+1}}</td>
+        <td>{{person.name}}</td>
+        <td>{{person.age}}</td>
+        <td>{{person.math}}</td>
+    </tr>
+</table>
+
+<script src="angular.js"></script>
+<script>
+
+</script>
+</body>
+</html>

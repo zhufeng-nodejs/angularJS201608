@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        [ng-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div ng-init="name='zfpx';age=8"></div>
+{{name}}
+<div ng-bind="name"></div>
+<div ng-bind-template="{{name}}{{age}}"></div>
+<div ng-cloak>{{name}}{{age}}</div>
+
+<script src="angular.js"></script>
+<script>
+//   ng-bind
+//    {{}}就是ng-bind的缩写，但是ng-bind不会出现闪烁问题
+//   ng-bind-template
+//    可以绑定多个数据
+//   ng-cloak
+//    需要增加一个隐藏的样式 [ng-cloak]{display: none;}
+//    这是项目中最常用的解决方法
+</script>
+</body>
+</html>

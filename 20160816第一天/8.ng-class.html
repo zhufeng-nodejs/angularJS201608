@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .c1{
+            color: #ffffff;
+        }
+        .bg1{
+            background-color: red;
+        }
+        .bg2{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+
+<!--<div ng-init="flag=true" ng-class="{true:'bg1',false:'bg2'}[flag]">珠峰培训</div>-->
+<div ng-init="flag1=true;flag2=true" ng-class="{c1:flag1,bg1:flag2}">珠峰培训</div>
+<button ng-click="flag1=!flag1;flag2=!flag2">改变背景颜色</button>
+<script src="angular.js"></script>
+<script>
+//   ng-class 动态绑定样式名
+//    1.ng-class='{true:'bg1',false:'bg2'}[flag]',其中flag是Boolean类型的值，true得时候，bg1样式有效，false的时候bg2样式有效，两种样式不共存
+//    2.ng-class="{c1:flag1,bg1:flag2}",根据flag1或者flag2对应的值，如果是true前面对应的样式是有效的，否则无效
+//   ng-click 给当前的DOM元素绑定一个点击事件
+</script>
+</body>
+</html>

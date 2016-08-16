@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="text" ng-model="value">
+{{value|currency:'£'}}
+<input type="text" ng-model="name">
+{{name|uppercase}}
+{{name|lowercase}}
+<input type="text" ng-model="num">
+{{num|number:1}}
+{{"12345"|limitTo:3}}
+{{[1,2,3,4,5]|limitTo:3}}
+
+{{{name:'zfpx'}|json}}
+
+{{2471323351750|date:'yy-MM-dd HH:mm:ss Z'}}
+
+{{['zhangsan*','zhangli']|filter:change()}}
+
+{{[{age:8},{age:12},{age:10}]|orderBy:'age':true}}
+<script src="angular.js"></script>
+<script>
+    //   过滤器也是一个方法
+    //    过滤器的使用
+    //    {{属性 | 过滤器 : 参数1 : 参数2}} ，其中|是分割符 ：后面进行传参
+    //    1.currency 货币过滤器
+    //      如果不传参默认的是$,也可以自己传递参数
+    //    2.uppercase lowercase 大小写过滤器
+    //    3.number 限制数字后面小数点的位数,参数是保留的小数点的位数
+    //    4.limitTo 用来限制字符串的长度，数组的长度
+    //    5.json 把普通对象转为json对象
+    //    6.date 转换时间的格式
+    //    7.filter
+    //    根据条件过滤数组,将过滤后的内容以一个新的数组返回
+    //    参数1 可以是字符串,也可以是一个方法,根据他的返回值进行过滤;参数2 true要求严格匹配,false不区分大小写,不用严格匹配,不写第二个参数的话,默认的是false
+    //
+    var myApp = angular.module('myApp', []);
+    myApp.controller('myCtrl', function ($scope) {
+        $scope.change = function () {
+            return 'zhang'
+        };
+    });
+    //    orderBy
+    //    数组实现排序的功能,将数组排序后返回一个新的数组
+    //    参数1 可以字符串,按照那一项来排序;参数2 true实现数组的倒序,false是正序,不写默认是false
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div ng-controller="myCtrl">
+    {{name}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    // 如何定义一个模块
+    //    angular.module()
+    //    参数1,模块的名字,参数2是数组,可以注入依赖的模块,如果没有可依赖的模块写[],必须写;
+    //    返回值是module对象,我们的angularJS一切从模块开始
+    var myMod = angular.module('myMod', []);
+    //  angular.module('myMod');//调用这个模块
+    //  定义一个控制器,会自动注入一个对象 $scope
+    myMod.controller('myCtrl', function ($scope) {
+        //   可以有很多控制器
+        //   可管理的范围是ng-controller= 'myCtrl'的范围
+        //   形成一个自己的作用域
+        //   定义的变量和方法,都是定义在$scope上的属性
+        $scope.name = 'zfpx';
+        console.log($scope)
+    });
+
+    //  作用域有一个相当于原型继承的机制
+    //    儿子可以拿到父亲作用域定义的属性
+    //    1.$rootScope
+    //    2.ng-repeat 形成的每一个DOM元素都会形成一个作用域
+    //    3.ng-if形成自己的作用域
+    //    4.ng-controller形成自己的作用域
+</script>
+</body>
+</html>

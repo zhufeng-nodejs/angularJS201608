@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .bg1{
+            background-color: red;
+        }
+        .bg2{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<div ng-init="name=['田文','张震','白雪']"></div>
+<ul>
+    <li ng-repeat="a in name" ng-class="{bg1:$odd,bg2:$even}">{{a}}</li>
+</ul>
+
+<script src="angular.js"></script>
+<script>
+
+</script>
+</body>
+</html>
