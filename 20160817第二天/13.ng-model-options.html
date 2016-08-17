@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+
+
+<div ng-controller="myCtrl">
+    <!--<input type="text" ng-model="value" ng-model-options="{updateOn:'blur'}"/>-->
+    <input type="text" ng-model="value" ng-model-options="{debounce:1000}"/>
+    <table class="table table-bordered">
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>数学成绩</th>
+        </tr>
+        <tr ng-repeat="a in arr|filter:value">
+            <td>{{$index+1}}</td>
+            <td>{{a.name}}</td>
+            <td>{{a.age}}</td>
+            <td>{{a.math}}</td>
+        </tr>
+    </table>
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myMod=angular.module('myMod',[]);
+    myMod.controller('myCtrl', function ($scope) {
+        $scope.arr=[{name:'zhangsan',age:10,math:100},{name:'lisi',age:15,math:150},{name:'wangwu',age:13,math:130},{name:'zhaoliu',age:20,math:110}]
+
+    })
+
+
+</script>
+</body>
+</html>

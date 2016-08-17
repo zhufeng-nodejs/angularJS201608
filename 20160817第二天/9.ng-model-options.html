@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <!--<input type="text" ng-model="value" ng-model-options="{updateOn:'blur'}"/>-->
+    <!--<input type="text" ng-model="value"/>-->
+    <input type="text" ng-model="value" ng-model-options="{debounce:1000}"/>
+    <table class="table table-bordered">
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>数学成绩</th>
+        </tr>
+        <tr ng-repeat="a in arr |filter:value">
+            <td>{{$index+1}}</td>
+            <td>{{a.name}}</td>
+            <td>{{a.age}}</td>
+            <td>{{a.math}}</td>
+        </tr>
+    </table>
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+//        在控制器中不要操作DOM,比较消耗性能;
+       $scope.arr=[{name:'zhangsan',age:10,math:100},{name:'lisi',age:12,math:130},{name:'wangwu',age:19,math:110},{name:'zhaoliu',age:15,math:150}]
+
+
+    });
+
+//    ng-model-options="{updateOn:'blur'}"
+//    当失去焦点的时候,再次出发 $digest()脏值查询,实现页面数据的更新
+//    当数据发生改变的 $digest()根据数据的变化不停的出发,性能不好
+//    ng-model-options="{debounce:1000}"
+//    1000毫秒之后触发 $digest(),性能比较好
+</script>
+</body>
+</html>

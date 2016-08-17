@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    {{age}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope,$interval,$timeout) {
+//        注入服务
+        $scope.age = 8;
+//        setInterval(function () {
+////            $scope.age++;
+//            $scope.$apply(function () {
+//                $scope.age++;
+//            });
+////          强制进行刷新
+//        },1000)
+//        $interval(function () {
+//            $scope.age++
+//        },1000);
+        $scope.fn = function () {
+            $timeout.cancel(timer);
+            $scope.age++;
+            var timer = $timeout($scope.fn,1000);
+        };
+        $scope.fn();
+
+    });
+//    脏值查询
+//    setInterval,无法触发脏值查询机制
+//     $scope.$apply();强制进行刷新
+//    用法:1.$scope.$apply();
+//    2.$scope.$apply(function(){})
+
+//    服务:可全局调用
+
+//    $interval.cancel():清除定时器
+</script>
+</body>
+</html>

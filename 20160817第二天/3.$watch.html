@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="value"/>
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+//        $scope.$watch('value', function (newVal, oldVal) {
+////           回调函数中 参数1 最新的value的值,参数2是上一次的value值
+//            console.log(newVal, oldVal)
+//        });
+        $scope.$watch(function () {
+            return $scope.value
+        }, function (newVal, oldVal) {
+            console.log(newVal, oldVal)
+        })
+    });
+//  $scope.$watch()监听数据的变化
+//    参数1
+//    可以是属性名
+//    可以是方法,我们取得是 return 的值
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="parentCtrl">
+    {{name}}
+    <div ng-controller="myCtrl">
+        {{name}}
+        <button ng-click="click()">传递数据</button>
+        <div ng-controller="sonCtrl">
+            {{zfpx}}
+        </div>
+    </div>
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+        $scope.name='珠峰培训';
+        $scope.click= function () {
+            $scope.$emit('toParent',$scope.name);
+//          参数1 就是事件的标识符,参数2是要发射的数据
+            $scope.$broadcast('toSon',$scope.name)
+        }
+
+    });
+    myMod.controller('parentCtrl', function ($scope) {
+        $scope.$on('toParent', function (event,data) {
+            $scope.name=data;
+        })
+    });
+    myMod.controller('sonCtrl', function ($scope) {
+        $scope.age = 8;
+        $scope.$on('toSon', function (event, data) {
+            $scope.zfpx=data+"已经"+$scope.age+"了!"
+        })
+
+    });
+
+//   $emit  是发射事件,将儿子的数据发射给自己及父级
+//   $broadcast  是广播事件,是将父亲的数据广播给自己和儿子
+//   $on 用来监听发射或者广播的事件的
+//   实现控制器之间数据的传递;
+</script>
+</body>
+</html>

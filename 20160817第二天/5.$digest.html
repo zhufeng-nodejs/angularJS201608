@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="one"/>
+    <input type="text" ng-model="two"/>
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+        $scope.$watch('one', function (newVal) {
+            $scope.two=newVal;
+        });
+        $scope.$watch('two', function () {
+            $scope.one=Math.random();
+        })
+    });
+
+//  10 $digest() iterations reached. Aborting!
+//    当脏值查询达到10次,认为是死循环,停止检查;
+//    页面数据的展示是在脏值检查之后
+//    $digest()至少进行两次
+//    $apply()内部调用的$rootScope.$digest();
+//    $apply()和$digest()的区别
+//    $apply()刷新自己及子作用域上的数据模型的数据
+//    $digest()是从跟作用域开始刷新数据
+
+
+</script>
+</body>
+</html>

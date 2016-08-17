@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    名称:{{product.name}}
+    价格:{{product.price}}
+    邮费:{{product.post}}
+    数量: <input type="text" ng-model="product.count"/>
+    总价钱:{{total()}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+        $scope.product = {
+            name:'angularJS权威指南',
+            price:30,
+            post:10,
+            count:1
+        };
+        $scope.total= function () {
+            return $scope.product.price*$scope.product.count+$scope.product.post
+        };
+        $scope.$watch($scope.total, function (newVal) {
+            $scope.product.post = newVal>100?0:10;
+        })
+    });
+
+
+//    需求
+//    产品 :angularJS权威指南
+//    价格:30
+//    邮费:10
+//    数量可以输入
+//    计算总价钱:当总价钱>=100的时候包邮
+</script>
+</body>
+</html>

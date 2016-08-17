@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="parentCtrl">
+    {{num}}
+    <div ng-controller="myCtrl">
+        <button ng-click="click1()">向上传递数据</button>
+
+    </div>
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+        $scope.num=0
+        $scope.click1=function(){
+            $scope.num++
+            $scope.$emit('toParent',$scope.num)
+        }
+
+    });
+    myMod.controller('parentCtrl', function ($scope) {
+        $scope.num=0;
+        $scope.$on('toParent',function(even,data){
+            $scope.num=data
+        })
+
+    });
+
+// 需求,点击向上传递按钮,在parentCtrl控制器中,$scope.num每次点击都累加 1;
+</script>
+</body>
+</html>

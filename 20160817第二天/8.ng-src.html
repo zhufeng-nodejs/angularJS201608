@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <img ng-src="{{baidu}}"/>
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope,$interval) {
+        $interval(function () {
+            $scope.baidu="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/lbs/pic/item/9345d688d43f8794c74a186dda1b0ef41bd53a3f.jpg"
+        },2000)
+    });
+
+//    ng-src 用在img标签中,实现连接,必须用{{}}引用
+//    只有当图片加载成功之后图片才会展示,为没有加载成功之前不会出现裂图
+</script>
+</body>
+</html>

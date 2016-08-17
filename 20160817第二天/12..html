@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="m">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul ng-controller="ctrl">
+    <li>书名{{book.name}}</li>
+    <li>价格{{book.price}}</li>
+    数量 <input type="text" ng-model="num"/>
+    <li>邮费{{book.post}}</li>
+    总价{{total()}}
+</ul>
+<script src="angular.js"></script>
+<script>
+    var mod=angular.module('m',[]);
+    mod.controller('ctrl',function ($scope) {
+        $scope.book={name:'a',price:30,post:10}
+        $scope.total= function () {
+            return $scope.book.price*$scope.num+$scope.book.post;
+        }
+        $scope.$watch($scope.total,function (n,o) {
+            $scope.book.post=n>100?0:10;
+        })
+    })
+</script>
+</body>
+</html>

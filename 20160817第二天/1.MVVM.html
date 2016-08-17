@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    {{name}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+        $scope.name = 'zfpx';
+    });
+
+// MVVM
+//   M model 用来存放数据
+//   V view  视图展示
+//   VM viewModel  视图模型 (可以认为是$scope)
+</script>
+</body>
+</html>
