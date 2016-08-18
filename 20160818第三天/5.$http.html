@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl',function ($scope,$http) {
+//        注入$http服务
+//        $http向后台发送请求，请求数据
+        $http({
+            url:'http1.json',
+//            method:'GET',//请求方法是大写
+//            params:{data:'zfpx'}//只是对于GET请求使用，在问号后面传递参数
+            method:'POST',
+            data:{data:'zfpx'}//针对post请求，传递请求体重的内容
+        }).success(function (data,status,headers,config) {
+//            当成功的时候执行success方法中的回调函数
+//            data请求回来的数据
+//            status状态码
+//            headers是一个方法，执行时可看到头部信息
+//            config配置信息，包含以上三项的内容
+            console.log('数据===>',data);
+            console.log('状态码===>',status);
+            console.log('头部信息===>',headers());
+            console.log('配置内容===>',config)
+
+        }).error(function (err) {
+//            当失败的时候会执行error中的回调函数
+//            err错误信息
+            console.log('err==>',err)
+        })
+    });
+
+//    $http返回的是一个 promise（用来解决异步的）
+
+//    封装的简便的方法
+//    $http.get()  $http.delete()
+//    参数1 路径字符串 参数2 config(对象，放置配置的内容)
+//    $http.post()  $http.put()
+//    参数1 路径字符串 参数2 请求体data 参数3 config(对象，放置配置的内容)
+//    $http.jsonp()
+//    参数 请求的路径
+//    实现跨域请求，其回调函数的名字是固定的cb = JSON_CALLBACK
+</script>
+</body>
+</html>

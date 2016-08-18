@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <!--用法1-->
+    <!--{{name|uppercase}}-->
+    {{name}}
+
+</div>
+<script src="angular.js"></script>
+
+<script>
+    // uppercase为例
+    var myMod=angular.module('myMod',[]);
+//    myMod.controller('myCtrl',function ($scope,$filter) {
+////        2.注入 $filter服务
+////        $filter('过滤器的名字')(数据)
+//        $scope.name = 'zhufengpeixun';
+//        $scope.name = $filter('uppercase')($scope.name)
+//    })
+//    myMod.controller('myCtrl',function ($scope,uppercaseFilter) {
+////      3.过滤器的名字+Filter(例如 upppercaseFilter),注入进来
+////        uppercaseFilter(数据)
+//        $scope.name = 'zhufengpeixun';
+//        $scope.name = uppercaseFilter($scope.name)
+//    })
+    myMod.controller('myCtrl',['$scope','uppercaseFilter',function (s,u) {
+        s.name = 'zhufengpeixun';
+        s.name = u(s.name)
+    }]);
+//   代码压缩的时候会把作为形参的服务压缩成一个字母，angularJS会找不到这个服务，解决方法，以数组的形式进行传递服务；
+
+</script>
+</body>
+</html>

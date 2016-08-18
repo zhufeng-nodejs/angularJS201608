@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <button class="btn btn-primary" ng-disabled="flag" ng-click="getCode()">{{value}}</button>
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope, $interval) {
+        $scope.flag = false;
+        $scope.value = '获取验证码';
+        $scope.getCode = function () {
+            $scope.flag = true;
+            $scope.value = '5秒后获取验证码';
+            $scope.num = 5;
+            var timer = $interval(function () {
+                $scope.num--;
+                $scope.value = $scope.num + '秒后获取验证码';
+                if ($scope.num < 1) {
+                    $interval.cancel(timer);
+                    $scope.flag = false;
+                    $scope.value = '获取验证码';
+                }
+            }, 1000)
+        };
+    });
+    //    ng-disabled 当为true的时候，处于不可点击状态，false的时候可点击
+
+    //    需求
+    //    开始处于可点击状态，内容是获取验证码
+    //    点击之后，处于不可点击状态，实现倒计时，例如5秒后再获取
+    //    5秒之后又处于可点击状态，内容是获取验证码
+</script>
+</body>
+</html>

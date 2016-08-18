@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="value" ng-change="seach()">
+    <ul>
+        <li ng-repeat="a in arr">{{a}}</li>
+    </ul>
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl',function ($scope,$http) {
+        $scope.seach=function () {
+            $http.jsonp('http://suggestion.baidu.com/su?wd='+$scope.value+'&cb=JSON_CALLBACK').success(function (data) {
+                $scope.arr=data.s
+            })
+        }
+    })
+</script>
+</body>
+</html>

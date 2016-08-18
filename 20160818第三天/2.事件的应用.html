@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="parentCtrl">
+    总价钱：<input type="text" ng-model="total" ng-change="calCount()">
+    <div ng-controller="myCtrl">
+        单价：{{obj.price}}
+        数量：<input type="text" ng-model="obj.count" ng-change="calTotal()">
+    </div>
+</div>
+
+<script src="angular.js"></script>
+<script>
+    // 需求
+    //    输入总的价钱，计算出可以买多少个，（放在父集控制器中）
+    //    输入总数量，计算出需要使用多少钱，（放在子集控制器中）
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl',function ($scope) {
+        $scope.obj = {
+            price:20,
+            count:1
+        };
+        $scope.calTotal = function () {
+            $scope.$emit('toParent',$scope.obj.price*$scope.obj.count)
+        };
+        $scope.$on('toSon',function (event, data) {
+            $scope.obj.count=data/$scope.obj.price;
+        });
+    });
+    myMod.controller('parentCtrl',function ($scope) {
+        $scope.$on('toParent',function (event, data) {
+            $scope.total=data;
+        });
+        $scope.calCount = function () {
+            $scope.$broadcast('toSon',$scope.total)
+        };
+    })
+    
+</script>
+</body>
+</html>

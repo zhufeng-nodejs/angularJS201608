@@ -27,8 +27,17 @@
 //    $digest()至少进行两次
 //    $apply()内部调用的$rootScope.$digest();
 //    $apply()和$digest()的区别
-//    $apply()刷新自己及子作用域上的数据模型的数据
-//    $digest()是从跟作用域开始刷新数据
+
+
+
+
+
+
+
+
+// 纠错：
+//    $digest()循环刷新自己及子作用域上的数据模型的数据
+//    $apply()是从跟作用域开始循环刷新数据，调用的  $rootScope.$digest()
 
 
 </script>

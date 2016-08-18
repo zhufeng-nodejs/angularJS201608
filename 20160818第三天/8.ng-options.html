@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <select ng-model="c" ng-options="a.id as a.name for a in arr" ng-change="change()">
+        <!-- a.id as a.name for a in arr -->
+        <!--a.name作为option标签里面的内容，a.id 是option的value的值-->
+        <option value="">请选择</option>
+    </select>
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+    myMod.controller('myCtrl', function ($scope) {
+        $scope.arr=[{id:1,name:'郭翔'},{id:2,name:'金敏华'},{id:3,name:'苏畅'},{id:4,name:'刘凯'}];
+        $scope.change = function () {
+            console.log($scope.c)
+        };
+    });
+//   ng-options 用在select标签里面
+</script>
+</body>
+</html>

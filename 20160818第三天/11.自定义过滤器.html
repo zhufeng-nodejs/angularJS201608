@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <!--{{name | zfpx:2}}-->
+    {{name}}
+
+</div>
+<script src="angular.js"></script>
+<script>
+    var myMod=angular.module('myMod',[]);
+//    myMod.controller('myCtrl',['$scope','$filter',function (s,$filter) {
+//        s.name='zhufengpeixun';
+//        s.name = $filter('zfpx')(s.name,2)
+//    }]);
+    myMod.controller('myCtrl',['$scope','zfpxFilter',function (s,f) {
+        s.name='zhufengpeixun';
+        s.name = f(s.name,4)
+    }]);
+    myMod.filter('zfpx',function (uppercaseFilter,lowercaseFilter) {
+//        参数1，过滤器的名字，参数2 函数（定义过滤器的方法）
+        return function (input,len) {
+//        input就是要使用该过滤器的数据
+//        从第二个参数开始，就是冒号后面传递的参数
+//        该需求中input是 zhufengpeixun,  len是2
+            return uppercaseFilter(input.slice(0,len))+lowercaseFilter(input.slice(len))
+        }
+    });
+//    定义过滤器
+
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="parentCtrl">
+    父亲:{{name1}}
+    <button ng-click="broadcast()">广播给儿子</button>
+    <div ng-controller="myCtrl1">
+        我：<button ng-click="emit()">传递给父亲</button>
+    </div>
+    <div ng-controller="myCtrl2">
+        兄弟：{{name2}}
+    </div>
+</div>
+
+<script src="angular.js"></script>
+<script>
+
+    var myMod = angular.module('myMod', []);
+    myMod.controller('parentCtrl',function ($scope) {
+        $scope.$on('toParent',function (event, data) {
+            $scope.name1=data
+        });
+        $scope.broadcast=function () {
+            $scope.$broadcast('toSon',$scope.name1)
+        }
+    });
+    myMod.controller('myCtrl1',function ($scope) {
+        $scope.name = '白雪';
+        $scope. emit= function () {
+            $scope.$emit('toParent', $scope.name)
+        };
+
+    });
+    myMod.controller('myCtrl2',function ($scope) {
+        $scope.$on('toSon',function (event, data) {
+            $scope.name2=data;
+        })
+    });
+//    $emit  $broadcast 都是基于事件才能触发
+</script>
+</body>
+</html>
