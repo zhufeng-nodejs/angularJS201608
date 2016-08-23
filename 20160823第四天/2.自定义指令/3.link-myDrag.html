@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        my-drag,[my-drag],.my-drag{
+            position: absolute;
+            top:0;
+            left: 0;
+            width:100px;
+            height: 100px;
+            background-color: #2b542c;
+        }
+    </style>
+</head>
+<body>
+
+<my-drag></my-drag>
+<div my-drag></div>
+<div class="my-drag"></div>
+
+<script src="../angular.js"></script>
+<script>
+    var myApp = angular.module('myApp', []);
+    myApp.directive('myDrag',function () {
+        return {
+            restrict:'ECA',
+//            默认的是EA
+            link:function (scope, element, attrs) {
+                element.on('mousedown',function (e) {
+                    e.preventDefault();
+                    var disX=e.pageX-element[0].offsetLeft;
+//                   轻量级的jQuery中没有offset()方法，转为原声JS对象 element[0]
+                    var disY=e.pageY-element[0].offsetTop;
+                    angular.element(document).on('mousemove',function (e) {
+                        var curX=e.pageX-disX;
+                        var curY=e.pageY-disY;
+                        element.css({
+                            left:curX+'px',
+                            top:curY+'px'
+                        })
+                    });
+                    angular.element(document).on('mouseup',function () {
+                        angular.element(document).off();
+                    })
+                })
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>

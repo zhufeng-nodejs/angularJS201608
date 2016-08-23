@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="nameCtrl">
+    <!--<zfpx-dir name="{{nameCtrl}}"></zfpx-dir>-->
+    <zfpx-dir name="nameCtrl" greet="greetCtrl(d)"></zfpx-dir>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    var myApp=angular.module('myApp',[]);
+    myApp.controller('myCtrl',['$scope',function ($scope) {
+        $scope.nameCtrl='zfpx';
+        $scope.greetCtrl = function (a) {
+            alert(a);
+        };
+    }]);
+    myApp.directive('zfpxDir',function () {
+        return{
+            template:' <input type="text" ng-model="nameDir"> <button ng-click="greetDir({d:nameDir})">打招呼</button>',
+//            greetDir({d:nameDir})中{d:nameDir}是一个对象nameDir是要传的参数
+//            name1就是{name}}的字面量的值
+            scope:{
+//                name1:'@name'
+//                name:'@'
+//               名字相同的时候直接用 @ 就可以
+//               @name中的 name是自定义指令中的name属性
+//               @name获取的是name="{{nameCtrl}}"中{{nameCtrl}}的字面量的值，那么name1在当前指令所在的所用域可随处调用name1存储的{{nameCtrl}}的字面量的值
+                nameDir:"=name",
+//                名字相同的时候直接用 = 就可以
+//                实现和myCtrl的双向数据绑定
+//                "=name"获取的是 name="nameCtrl"中nameCtrl存储的值，在当前指令所在的作用域修改nameDir也可以同时修改myCtrl中的nameCtrl的值
+//                & 用来取 myCtrl 中的方法的
+                greetDir:'&greet'
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
+
+
+

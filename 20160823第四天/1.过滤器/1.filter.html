@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    {{arr |zfpx}}
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('myCtrl',['$scope',function ($scope) {
+//        写成数组的形式，为了防止代码压缩时，将服务压缩成一个字符，而angular无法解析
+        $scope.arr=[1,2,1,3,1,3];
+    }]);
+    myApp.filter('zfpx',function () {
+//        定义过滤器的方法是return 后面的方法
+        return function (input) {
+            var newArr=[];
+            for(var i=0;i<input.length;i++){
+                var cur=input[i];
+                if(newArr.indexOf(cur)===-1){
+                    newArr.push(cur);
+                }
+            }
+            return newArr;
+        }
+    })
+</script>
+</body>
+</html>

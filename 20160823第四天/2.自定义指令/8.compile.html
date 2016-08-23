@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div zfpx-dir="3">
+    <p>{{name}}</p>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    var myApp=angular.module('myApp',[]);
+    myApp.directive('zfpxDir',function () {
+        return{
+//            scope:true,
+            compile:function (tElement,tAttrs) {
+//            compile:编译阶段，在link之前执行，实现DOM元素的转换，在项目中不常用
+//            tElement :在link操作之前的元素，
+//            tAttrs ：在link操作之前的存储属性的对象
+                var eleChildren=tElement.children();
+                for(var i=0;i<tAttrs['zfpxDir']-1;i++){
+                    tElement.append(eleChildren.clone())
+                }
+                return function (scope) {
+//                    就相当于link的作用
+//                    scope:如果没有自己的作用域，就是父级作用域
+                    scope.name='郭翔'
+                }
+            },
+//            link:function (scope) {
+//            存在compile那么link就无效了
+////              scope：和作用域连接在一起
+//                scope.name='珠峰培训'
+//            }
+        }
+    })
+
+
+</script>
+</body>
+</html>
+
+
+

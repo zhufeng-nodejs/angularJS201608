@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    myCtrl: <input type="text" ng-model="name">
+    zfpx-dir: <zfpx-dir name="{{name}}"></zfpx-dir>
+</div>
+<script src="../angular.js"></script>
+<script>
+    var myApp=angular.module('myApp',[]);
+    myApp.controller('myCtrl',['$scope',function ($scope) {
+        $scope.name = 'zhufengpeixun';
+    }]);
+    myApp.directive('zfpxDir',function () {
+        return {
+            template:'<input type="text" ng-model="name1">',
+            scope:{
+                name1:'@name',
+//            name1:'@name' 将  zfpx-dir指令中属性为name存储的字面量的值，赋值给name1,在当前的作用域中就可以调用name1这个属性
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
+
+

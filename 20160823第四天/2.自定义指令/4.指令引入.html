@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        my-drag,[my-drag],.my-drag{
+            position: absolute;
+            top:0;
+            left: 0;
+            width:100px;
+            height: 100px;
+            background-color: #2b542c;
+        }
+    </style>
+</head>
+<body>
+
+<my-drag></my-drag>
+<div my-drag></div>
+<div class="my-drag"></div>
+<input type="text" my-model="value">
+{{value}}
+<script src="jquery.js"></script>
+<script src="../angular.js"></script>
+<script src="directiveMod.js"></script>
+<script>
+    var myApp = angular.module('myApp', ['directiveMod']);
+
+</script>
+</body>
+</html>

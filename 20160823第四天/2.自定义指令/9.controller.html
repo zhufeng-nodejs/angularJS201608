@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<girl clever></girl>
+
+<script src="../angular.js"></script>
+<script>
+    var myApp=angular.module('myApp',[]);
+    myApp.directive('girl',function () {
+        return{
+            template:'<h1 ng-click="a()">金敏华</h1>{{kinds}}',
+            controller:['$scope',function ($scope) {
+//          定义可被外界指令调用的公用部分，外界调用时取得是他的一个实例
+                $scope.kinds=[];
+                this.addkinds=function (kind) {
+                    $scope.kinds.push(kind)
+                }
+            }],
+            link:function (scope) {
+                scope.a=function () {
+                    alert(scope.kinds)
+                }
+            }
+        }
+    });
+    myApp.directive('clever',function () {
+        return {
+            require:'?girl1',
+//            'girl':在同级查找该指令，如果找不到会报错
+//            '?girl':在同级查找，如果找不到不会报错，会致为girlCtrl为null
+//            '^girl':在同级和父级中查找，找不到会报错
+//            '?^girl':在同级和父级中查找，找不到不会报错，会致为girlCtrl为null
+
+//            导入指令
+            link:function (scope, element, attrs, girlCtrl) {
+//                girlCtrl就是require进来的指令中，controller方法的一个实例
+//                girlCtrl.addkinds('clever');
+            }
+
+        }
+    })
+
+
+</script>
+</body>
+</html>
+
+
+

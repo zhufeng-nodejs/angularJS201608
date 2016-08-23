@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <zfpx-dir name="{{name}}"></zfpx-dir>
+</div>
+<script src="../angular.js"></script>
+<script>
+    var myApp=angular.module('myApp',[]);
+    myApp.controller('myCtrl',['$scope',function ($scope) {
+        $scope.name = 'zhufengpeixun';
+    }]);
+    myApp.directive('zfpxDir',function () {
+        return {
+            template:'<div>{{name1}}</div>',
+            link:function (scope,element,attrs) {
+//                实现与DOM元素、作用域的链接
+//                attrs['name'] 实现取值
+                scope.name1 = attrs['name']
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
+
+

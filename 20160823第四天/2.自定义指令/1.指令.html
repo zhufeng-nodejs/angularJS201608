@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--用于属性名-->
+<div zfpx-dir>8岁了</div>
+<!--用于标签-->
+<zfpx-dir></zfpx-dir>
+<!--用于样式类名-->
+<div class="zfpx-dir"></div>
+
+<!--注释 很少用（必须有replace:true）-->
+<!-- directive:zfpx-dir -->
+<!--前后要有空格-->
+
+<script src="../angular.js"></script>
+<script>
+    var myApp = angular.module('myApp', []);
+    myApp.directive('zfpxDir',function () {
+//        定义一个指令
+//        命名的时候是驼峰命名法，使用的时候用 - 分割，将大写转为小写
+//        zfpxDir 使用的时候  zfpx-dir
+        return {
+//            返回值是对象
+//            template:'<p>珠峰培训 <span ng-transclude></span></p>',
+            templateUrl:'url.html',
+//            引入外界的模板
+//
+//            定义一个模板
+            replace:true,
+//            替换原有的标签
+            restrict:'ECMA',
+//            定义指令可以使用的位置，不写的话，默认值是EA
+//            E  element 用于标签
+//            C  class   用于样式类名
+//            M  comment  用于注释
+//            A  attribute 用于是属性名
+            transclude:true,
+//            保存原有标签里面的内容
+//            和 ng-transclude(会形成自己的作用域)结合使用
+//            原有标签里面的内容添加到<span ng-transclude></span>中
+            scope:true,
+//            会形成自己的作用域
+            /**
+             *
+             * @param scope :当前模板的作用域，如果当前模板没有形成作用域，会直接找父集的作用域
+             * @param element ：自定义指令所在的DOM元素，是一个jQuery对象，内置的有轻量级的jQuery也就是 jqLite(简化版的jQuery)
+             * @param attrs ：自定义指令所在的DOM元素上的属性存储在attrs对象中
+             */
+            link:function (scope,element,attrs) {
+//             实现和 DOM元素、作用域的链接（链接阶段）
+
+            }
+
+        }
+
+    })
+</script>
+</body>
+</html>
