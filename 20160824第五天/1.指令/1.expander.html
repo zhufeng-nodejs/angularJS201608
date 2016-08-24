@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="1.expander.css">
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <accordion>
+        <my-expander ng-repeat="expander in expanders" title="expander.title">
+            {{expander.content}}
+        </my-expander>
+    </accordion>
+</div>
+
+<script src="angular.js"></script>
+<script src="1.expander.js"></script>
+</body>
+</html>

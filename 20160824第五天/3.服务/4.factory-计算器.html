@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="one">
+    <select ng-model="val">
+        <!--select 中ng-model 指令记录 option的value-->
+        <option value="+">+</option>
+        <option value="*">*</option>
+        <option value="-">-</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" ng-model="two">
+    <button ng-click="cal()">=</button>
+    {{result}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myModule = angular.module('myModule', []);
+    myModule.factory('zfpxPro',function () {
+//          封装的服务是由前缀 $  currency='$'
+        var currency='$';
+//        对修改关闭，对扩展开放
+        return {
+            '+':(a,b)=>currency+(parseFloat(a)+parseFloat(b)),
+            '-':(a,b)=>currency + (a-b),
+            '*':(a,b)=>currency + (a*b),
+            '/':(a,b)=>currency + (a/b),
+        }
+
+    });
+
+
+    myModule.controller('myCtrl',['$scope','zfpxPro',function ($scope,zfpxPro) {
+        $scope.cal=function () {
+            $scope.result=zfpxPro[$scope.val]($scope.one,$scope.two);
+        }
+    }])
+</script>
+</body>
+</html>

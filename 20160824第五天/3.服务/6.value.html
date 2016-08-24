@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    {{result}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myModule = angular.module('myModule', []);
+//    value 用来定义变量，就相当于zfpxPro 赋值为 11111
+//    zfpxPro 也可以作为一个服务注入到控制器中
+//    不能使用配置函数
+    myModule.value('zfpxPro1','11111');
+    myModule.controller('myCtrl',['$scope','zfpxPro1',function ($scope,zfpxPro) {
+        $scope.result=zfpxPro
+    }]);
+//    myModule.config(function (zfpxPro1) {
+////        会报错 Unknown provider: zfpxPro1
+//
+//    });
+
+//   constant : 定义常量
+//    可以注入到配置函数中，和 value的区别
+    myModule.constant('zfpxPro','11111');
+    myModule.config(function (zfpxPro) {
+//    直接写服务的名字 ,可以取到zfpxPro的值
+        console.log(zfpxPro)
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <!--{{result(1,2)}}-->
+    <!--方法可以传参数-->
+    {{result1}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myModule = angular.module('myModule', []);
+//   快捷键 ngma + tab
+//    1. provider 定义服务,注入到控制器的时候取得他的实例上$get方法的返回值,必须有 this.$get
+    myModule.provider('zfpxPro',function () {
+        this.$get=function () {
+            return {
+//                '+':function(a,b){
+//                    return a+b;
+//                }
+//                '+':(a,b)=>{
+//                    return a+b
+//                }
+                '+':(a,b)=>a+b,
+                '-':(a,b)=>a-b,
+                '*':(a,b)=>a*b,
+                '/':(a,b)=>a/b,
+//                (a,b)用来传递参数 => 后边就是return的值
+
+//            箭头函数 es6语法
+            }
+        }
+    });
+    myModule.controller('myCtrl',['$scope','zfpxPro',function ($scope,zfpxPro) {
+//      直接将自定义的服务注入进来，zfpxPro是实例的$get方法的返回值,就是  {'+':function(a,b){return a+b;}
+        $scope.result1 = zfpxPro['+'](1,2);
+//        $scope.result=function (a, b) {
+//            return a+b;
+//        };
+    }])
+</script>
+</body>
+</html>

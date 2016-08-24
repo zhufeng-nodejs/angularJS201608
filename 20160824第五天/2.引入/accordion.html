@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div ng-controller="AccordionDemoCtrl">
+    <accordion close-others="oneAtATime">
+        <div accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
+            {{group.content}}
+        </div>
+    </accordion>
+</div>
+
+
+<script src="angular.js"></script>
+<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.11.0/ui-bootstrap-tpls.js"></script>
+<!--有我们需要的指令-->
+<!--Since version 0.14.0 we started to prefix all our components. If you are upgrading from ui-bootstrap 0.13.4 or earlier-->
+<!--0.13.4 or earlier 版本之前 把 uib- 删掉-->
+<script src="accordion.js"></script>
+
+<!--
+引用外部的angularJS的指令文件
+1. 先引进来JS文件
+2. 将JS文件的模板注入到自己的模板中
+-->
+</body>
+</html>

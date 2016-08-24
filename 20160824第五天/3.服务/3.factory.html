@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    {{result}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myModule = angular.module('myModule', []);
+//    factory 定义服务的一种方法，内部封装的也是 provider
+//    函数定义部分只要 return 的返回值,没有 this.$get
+//    不能调用config配置函数
+//    最常用的定义服务的方法
+    myModule.factory('zfpxPro',function () {
+//    相当于原声JS的一个工厂函数
+        return {
+            '+':(a,b)=>a+b,
+            '-':(a,b)=>a-b,
+            '*':(a,b)=>a*b,
+            '/':(a,b)=>a/b,
+        }
+    });
+    myModule.controller('myCtrl',['$scope','zfpxPro',function ($scope,zfpxPro) {
+//        zfpxPro 注入的就是 return 后面的值
+        $scope.result = zfpxPro['+'](1,2)
+
+    }])
+</script>
+</body>
+</html>

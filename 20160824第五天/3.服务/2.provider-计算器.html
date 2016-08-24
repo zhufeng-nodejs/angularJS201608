@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="one">
+    <select ng-model="val">
+        <!--select 中ng-model 指令记录 option的value-->
+        <option value="+">+</option>
+        <option value="*">*</option>
+        <option value="-">-</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" ng-model="two">
+    <button ng-click="cal()">=</button>
+    {{result}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myModule = angular.module('myModule', []);
+    myModule.config(function (zfpxProProvider) {
+        zfpxProProvider.setCurrency('￥')
+    });
+    myModule.provider('zfpxPro',function () {
+//          封装的服务是由前缀 $  currency='$'
+        var currency='$';
+        this.setCurrency=function (a) {
+//          用来修改currency的值得
+            currency=a;
+        };
+//        对修改关闭，对扩展开放
+        this.$get=function () {
+            return {
+                '+':(a,b)=>currency+(parseFloat(a)+parseFloat(b)),
+                '-':(a,b)=>currency + (a-b),
+                '*':(a,b)=>currency + (a*b),
+                '/':(a,b)=>currency + (a/b),
+            }
+        }
+    });
+
+//    配置函数,可以对服务暴露出来的接口进行配置，函数中传递的参数是  服务的名字+Provider
+//   zfpxProProvider 是zfpxPro服务的实例
+    myModule.controller('myCtrl',['$scope','zfpxPro',function ($scope,zfpxPro) {
+        $scope.cal=function () {
+            $scope.result=zfpxPro[$scope.val]($scope.one,$scope.two);
+//          zfpxPro[$scope.val]调用服务中的方法
+        }
+
+    }])
+</script>
+</body>
+</html>

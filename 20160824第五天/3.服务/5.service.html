@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    {{result}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    var myModule = angular.module('myModule', []);
+//    service
+//    1.不能调用配置函数config
+//    2.相当于原声JS定义的构造函数（this.xxx= xxx）
+//    3.向控制器注入该服务的时候，注入的是该方法的一个实例
+    myModule.service('zfpxPro',function () {
+        this['+']=(a,b)=>parseFloat(a)+parseFloat(b);
+
+    });
+    myModule.controller('myCtrl',['$scope','zfpxPro',function ($scope,zfpxPro) {
+        $scope.result = zfpxPro['+'](1,2)
+    }])
+</script>
+</body>
+</html>
