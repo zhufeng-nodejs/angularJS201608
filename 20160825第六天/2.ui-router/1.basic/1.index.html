@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../bootstrap.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li class="active"><a ui-sref="index">首页</a></li>
+            <!-- ui-sref="index" 跳转 index状态对应下的路径-->
+            <li><a ui-sref="about">关于</a></li>
+            <li><a ui-sref="contact">联系</a></li>
+        </ul>
+    </div>
+
+</nav>
+<div class="container">
+    <div ui-view>
+        <!--ui-view 根据路由改变的页面渲染在该div中 -->
+    </div>
+</div>
+
+
+
+<script src="../../angular.js"></script>
+<script src="../../angular-ui-router.js"></script>
+<script>
+    var myMod = angular.module('myMod', ['ui.router']);
+    myMod.config(function ($stateProvider,$urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+//        可调用otherwise方法
+        $stateProvider.state('index',{
+//            参数1 为状态的名字，参数2 配置对象
+            url:'/',
+//            路由路径,地址栏中显示的路径
+            templateUrl:'templs/index.html',
+//            controller: function () {
+//
+//            },
+//            resolve: function () {
+//
+//            }
+        }).state('about',{
+            url:'/about',
+//            一个状态配置一个路径，路径不要重复
+            templateUrl:'templs/about.html',
+            controller: function ($scope) {
+                $scope.books = [{id: 1, name: 'js高程3'},{id: 2, name: 'node'},{id: 3, name: 'html5'}];
+
+            }
+        }).state('book',{
+            url:'/book/:name',
+            template:'{{a}}',
+            controller: function ($scope,$stateParams) {
+//                $stateParams对象 获取冒号后面的值
+                $scope.a=$stateParams.name
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../bootstrap.css"/>
+</head>
+<body>
+
+<a href="#/">首页</a>
+<a href="#/users">用户</a>
+<!--#/ 必须有#号，防止页面的跳转-->
+<div ng-view></div>
+<!--单页面应用-->
+<!--ng-view 只有这里面的内容跟着路由发生改变-->
+<!--ng-view 必须有，所有的页面都是渲染到该标签中的-->
+<script src="../angular.js"></script>
+<script src="../angular-route.js"></script>
+<script>
+    var myMod = angular.module('myMod', ['ngRoute']);
+    myMod.config(function ($routeProvider) {
+        $routeProvider.when('/',{
+//            参数1 path 配置的路由，参数2 是一个对象
+            template:'<h1>index</h1>'
+//            template,定义需要的模板
+
+        }).when('/users',{
+//            http://localhost:63342/20160826/1.ngRoute/1.ng-route.html#/users
+//      /users与地址栏的后边的路径一样
+            templateUrl:'users.html',
+            controller:['$scope','add',function ($scope,add) {
+//      控制器:用于同一个路由下的模板
+//                $scope.users=['郭翔','王建琪','白雪'];
+                $scope.users=[{id:1,name:'郭翔'},{id:2,name:'王建琪'},{id:3,name:'白雪'}];
+                $scope.result=add(1,2)
+            }] ,
+            resolve: {
+//      定义factory的服务,需要的是return后面的值，add可以注入到控制器中
+                add: function () {
+                    return function (a,b) {
+                        return a+b
+                    };
+                }
+            }
+        }).when('/user/:id',{
+//            /user/1   /user/2    /user/3
+            template:'我的ID号是{{id}}',
+            controller: function ($scope, $routeParams) {
+//          $routeParams 路由参数（是一个对象） 能够获取到冒号后面的值
+                $scope.id = $routeParams.id
+            }
+
+        }).otherwise('/');
+//        和上边的otherwise('/')一样
+//        otherwise({
+//          redirectTo:'/'
+//      })
+    })
+
+</script>
+</body>
+</html>

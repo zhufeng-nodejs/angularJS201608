@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="myMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../bootstrap.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li class="active"><a ui-sref="index.add">首页</a></li>
+            <li><a ui-sref="about">关于</a></li>
+            <li><a ui-sref="contact">联系</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div ui-view></div>
+</div>
+
+
+<script src="../../angular.js"></script>
+<script src="../../angular-ui-router.js"></script>
+<script>
+    var myMod = angular.module('myMod', ['ui.router']);
+    myMod.config(function ($stateProvider,$urlRouterProvider) {
+        $urlRouterProvider.otherwise('/index/add');
+        $stateProvider.state('index',{
+            url:'/index',
+            templateUrl:'templs/index.html',
+        }).state('index.add',{
+//          index.add  index状态下的add状态
+//          url:'/add'   地址栏中会在/add前面加上index状态下的路径 也就是 /index/add
+            url:'/add',
+            templateUrl:'templs/add.html',
+        }).state('index.list',{
+            url:'/list',
+            templateUrl:'templs/list.html',
+        }).state('about',{
+            url:'/about',
+            templateUrl:'templs/about.html',
+            controller: function ($scope) {
+                $scope.books = [{id: 1, name: 'js高程3'},{id: 2, name: 'node'},{id: 3, name: 'html5'}];
+
+            }
+        }).state('book',{
+            url:'/book/:name',
+            template:'{{a}}',
+            controller: function ($scope,$stateParams) {
+                $scope.a=$stateParams.name
+            }
+        }).state('contact',{
+            url:'/contact',
+            views:{
+                '':{
+//              默认状态下渲染该模板
+                   templateUrl:'templs/contact.html'
+                } ,
+                'tel@contact':{
+//               tel@contact
+//               contact状态对应的templs/contact.html页面中的 ui-view = ‘tel’视图 ，渲染的是templateUrl:'templs/tel.html'
+                    templateUrl:'templs/tel.html',
+                    controller: function ($scope) {
+                        $scope.tel='12345'
+                    }
+                },
+                'address@contact':{
+                    templateUrl:'templs/address.html'
+                }
+            },
+
+        })
+    })
+
+</script>
+</body>
+</html>
