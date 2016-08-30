@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="ng-grid.css">
+    <style>
+        .gridStyle{
+            margin: 20px auto;
+            border:1px solid green;
+            width:500px;
+            height:300px;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <div class="gridStyle" ng-grid="gridOptions"></div>
+</div>
+
+
+<script src="jquery-1.9.1.js"></script>
+<script src="angular.js"></script>
+<script src="ng-grid.debug.js"></script>
+<script>
+    var myMod = angular.module('myMod', ['ngGrid']);
+//    注入 ngGrid 模块
+    myMod.controller('myCtrl',function ($scope) {
+        $scope.users=[{name:'珠峰培训',age:8},{name:'珠峰',age:9},{name:'培训',age:12},{name:'珠峰培训2',age:11}];
+        $scope.pagingOptions={
+            pageSizes:[1,10,20],
+//            设置下拉空的内容
+            pageSize:1,
+//            设置下拉框的默认值
+            currentPage:1
+//            设置当前页的默认值
+        };
+        $scope.gridOptions={
+            data:'users',//要显示的数据，只能是字符串
+            enableRowSelection:false,//不让选中行
+            multiSelect:false,//不可以复选
+            enableCellSelection:true,//可以选中单元格
+            enableCellEdit:true,//可编辑单元格
+            enablePinning:true,//单元格可固定
+            columnDefs:[//定义列
+                {
+                    field:'name',//数据中的属性名
+                    displayName:'姓名' // 表头显示的内容
+                },
+                {
+                    field:'age',
+                    displayName:'年龄',
+                    cellFilter:'currency:"$"',
+//              cellFilter 对单元格内容的过滤
+                    enableCellEdit:false,
+//                    年龄不可以改
+                }
+            ],
+            enablePaging:true,//可以分页
+            showFooter:true,//显示页脚
+            pagingOptions:$scope.pagingOptions,//设置分页数据
+        }
+
+    })
+
+</script>
+
+</body>
+</html>

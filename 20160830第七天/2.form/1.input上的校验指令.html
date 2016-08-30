@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal ">
+            <div class="form-group">
+                <label class="control-label col-md-2">text</label>
+                <div class="col-md-10">
+                    <!--<input type="text" ng-model="name" ng-maxlength="16" ng-minlength="2" ng-pattern="/^_/" ng-trim="false" class="form-control" placeholder="用户名不要超过16个字符" required>-->
+                    <input type="text" ng-model="name" ng-maxlength="16" class="form-control" placeholder="用户名不要超过16个字符" required>
+                    {{name}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">email</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[email]进行验证-->
+                    <input type="email" ng-model="email" class="form-control" placeholder=""  ng-pattern="" required>
+                    {{email}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">url</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[url]进行验证-->
+                    <input type="url" ng-model="url" class="form-control"  ng-pattern="" required>
+                    {{url}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">date</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[date]进行验证-->
+                    <input type="date" ng-model="date" class="form-control"  required>
+                    {{date}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">number</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[date]进行验证-->
+                    <input type="number" ng-model="number" class="form-control" max="10" min="3"  required>
+                    {{number}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!--
+    required :必填项
+    ng-required=''：和required作用是一样的，表达式为true ，就是 required
+    ng-maxlength :控制字符的最大长度
+    ng-minlength :控制字符的最小长度
+    ng-pattern ：正则表达式
+    ng-trim:false  不去除首尾空格
+-->
+
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+
+
+</script>
+</body>
+</html>

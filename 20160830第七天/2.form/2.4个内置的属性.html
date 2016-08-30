@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        .userForm input.ng-pristine{
+            border-color:blue
+        }
+        .userForm input.ng-dirty.ng-invalid{
+            border-color:red
+        }
+        .userForm input.ng-valid{
+            border-color:green
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <form  name="myForm" class="form-horizontal userForm">
+            <div class="form-group">
+                <label class="control-label col-md-2">text</label>
+                <div class="col-md-10">
+                    <input type="text" name="user_name" ng-model="name" ng-maxlength="16" ng-minlength="8" class="form-control" placeholder="用户名不要超过16个字符" required>
+                    <div ng-show="myForm.user_name.$invalid&&myForm.user_name.$dirty">
+                        <div class="alert alert-danger">
+                            <p ng-show="myForm.user_name.$error.required">
+                                该项为必填项，请输入内容
+                            </p>
+                            <p ng-show="myForm.user_name.$error.maxlength">
+                                <!--ng-maxlength验证失败 ，会在$error中存 {maxlength：true} -->
+                                字符不可以超过16位
+                            </p>
+                            <p ng-show="myForm.user_name.$error.minlength">
+                                字符不可以少于8位
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">email</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[email]进行验证-->
+                    <input type="email" ng-model="email" class="form-control" required>
+                    {{email}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">url</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[url]进行验证-->
+                    <input type="url" ng-model="url" class="form-control"  required>
+                    {{url}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">date</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[date]进行验证-->
+                    <input type="date" ng-model="date" class="form-control"  required>
+                    {{date}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">number</label>
+                <div class="col-md-10">
+                    <!--内置有正则表达式对该指令input[date]进行验证-->
+                    <input type="number" ng-model="number" class="form-control" max="10" min="3"  required>
+                    {{number}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!--
+  $pristine  user_name文本框没有发生任何变化时 myForm.user_name.$pristine的值就是true
+  $dirty     文本框发生变化时  myForm.user_name.$dirty 是true
+  $invalid   验证失败时候时    myForm.user_name.$invalid 是true
+  $valid     验证成功时候     myForm.user_name.$valid 是true
+-->
+
+<!--
+  $error 是一个对象 ，存储验证信息的指令，如果验证失败，会存储一个属性到$error中
+         例如  required 如果没有填内容， myForm.user_name.$error.required 的值为true
+
+   name 不可以重复
+-->
+
+<script src="angular.js"></script>
+<script>
+    var myMod = angular.module('myMod', []);
+
+
+</script>
+</body>
+</html>
