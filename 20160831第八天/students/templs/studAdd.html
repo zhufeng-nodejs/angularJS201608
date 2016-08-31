@@ -1,0 +1,76 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        新增学员
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" name="addForm">
+            <div class="form-group">
+                <label class="control-label col-md-2">学员姓名</label>
+                <div class="col-md-8">
+                    <input type="text" name="stud_name" ng-model="name" ng-pattern="/^[\u4E00-\u9FA5]{2,4}$/" class="form-control" required>
+                    <div ng-show="addForm.stud_name.$invalid&&addForm.stud_name.$dirty">
+                        <div class="alert alert-danger">
+                            <p ng-show="addForm.stud_name.$error.required">请输入学员姓名</p>
+                            <p ng-show="addForm.stud_name.$error.pattern">请输入2到4位的中文名</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">学员性别</label>
+                <div class="col-md-8">
+                    <select class="form-control" ng-model="stud_sex">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">联系方式</label>
+                <div class="col-md-8">
+                    <input type="number" name="stud_number" ng-model="stud_number" ng-pattern="/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" class="form-control"  placeholder="请输入手机号" required>
+                    <div ng-show="addForm.stud_number.$invalid&&addForm.stud_number.$dirty">
+                        <div class="alert alert-danger">
+                            <p ng-show="addForm.stud_number.$error.required">请输入手机号</p>
+                            <p ng-show="addForm.stud_number.$error.pattern">格式不正确</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">年龄</label>
+                <div class="col-md-8">
+                    <input type="number" name="stud_age" ng-model="stud_age" min="18" class="form-control" required>
+                    <div ng-show="addForm.stud_age.$invalid&&addForm.stud_age.$dirty">
+                        <div class="alert alert-danger">
+                            <p ng-show="addForm.stud_age.$error.required">请输入年龄</p>
+                            <p ng-show="addForm.stud_age.$error.min">不能小于18岁</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">所在学期</label>
+                <div class="col-md-8">
+                    <select class="form-control">
+                        <option value="">请选择</option>
+                        <option value="201605期">201605期</option>
+                        <option value="201606期">201606期</option>
+                        <option value="201607期">201607期</option>
+                        <option value="201608期">201608期</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <a ui-sref="studList"><button class="btn btn-primary" ng-disabled="addForm.$invalid">保存</button></a>
+                    <a ui-sref="studList"><button class="btn btn-success">取消</button></a>
+                    <button class="btn btn-default">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>

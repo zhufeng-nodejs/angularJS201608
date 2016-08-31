@@ -1,0 +1,43 @@
+<div class="panel panel-success">
+    <div class="panel-body">
+        <div class="row">
+            <h1 class="text-center">珠峰培训学员管理系统</h1>
+            <form name="loginForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">用户邮箱</label>
+                    <div class="col-md-8">
+                        <input type="email" name="user_name" ng-model="user_name" ng-model-options="{updateOn:'blur'}" placeholder="建议使用126邮箱" class="form-control" required>
+                        <!--ng-model-options="{updateOn:'blur'}" 当光标离开的时候再判断-->
+                        <div ng-show="loginForm.user_name.$dirty&&loginForm.user_name.$invalid">
+                            <!--显示错误提示信息-->
+                            <div class="alert alert-danger">
+                                <p ng-show="loginForm.user_name.$error.required">请输入您的邮箱</p>
+                                <p ng-show="loginForm.user_name.$error.email">您的邮箱格式不正确</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">密码</label>
+                    <div class="col-md-8">
+                        <input type="password" name="user_password" ng-model="user_password" placeholder="只能使用数字、字母、下划线，区分大小写" ng-pattern="/^\w{6,16}$/" class="form-control" required>
+                        <div ng-show="loginForm.user_password.$invalid&&loginForm.user_password.$dirty">
+                            <div class="alert alert-danger">
+                                <p ng-show="loginForm.user_password.$error.required">请输入您的密码</p>
+                                <p ng-show="loginForm.user_password.$error.pattern">您的密码格式不正确</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <!-- col-md-offset-2 偏移2列-->
+                        <a ui-sref="studList"><button class="btn btn-success" ng-disabled="loginForm.$invalid">登录</button></a>
+                        <!-- loginForm.$invalid 验证失败为true 验证成功为false-->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 和后台用户的匹配，后期写-->
