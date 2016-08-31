@@ -1,8 +1,15 @@
 // 1.创建模块
-var studentApp = angular.module('studentApp', ['ui.router']);
+// index.html 的模块是studentApp，所以其他的模块必须注入到这个模块中
+var studentApp = angular.module('studentApp', ['ui.router','studCtrlMod']);
+//angularJS执行的第一个方法
+studentApp.run(function ($rootScope,$state) {
+    $rootScope.$state=$state;
+//    全局可以注入$state这个服务,其他页面不需要引入ui.router模块
+});
+
 // 2.配置路由
 studentApp.config(function ($stateProvider,$urlRouterProvider) {
-    $urlRouterProvider.otherwise('/login')
+    $urlRouterProvider.otherwise('/login');
     $stateProvider.state('login',{
     //    首页为 login
         url:'/login',

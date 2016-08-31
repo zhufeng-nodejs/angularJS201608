@@ -2,7 +2,7 @@
     <div class="panel-body">
         <div class="row">
             <h1 class="text-center">珠峰培训学员管理系统</h1>
-            <form name="loginForm" class="form-horizontal">
+            <form name="loginForm" class="form-horizontal" ng-controller="loginCtrl">
                 <div class="form-group">
                     <label class="control-label col-md-2">用户邮箱</label>
                     <div class="col-md-8">
@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
                         <!-- col-md-offset-2 偏移2列-->
-                        <a ui-sref="studList"><button class="btn btn-success" ng-disabled="loginForm.$invalid">登录</button></a>
+                        <button class="btn btn-success" ng-disabled="loginForm.$invalid" ng-click="login()">登录</button>
                         <!-- loginForm.$invalid 验证失败为true 验证成功为false-->
                     </div>
                 </div>
