@@ -82,6 +82,7 @@ studCtrlMod.controller('gridCtrl',  ['$scope','$http','$stateParams',function ($
             {
                 field:'id',
                 displayName:'序号',
+                cellClass:'',//给单元格增加样式
             },
             {
                 field:'name',//每一列的属性名
