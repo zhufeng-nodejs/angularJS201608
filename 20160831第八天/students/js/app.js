@@ -2,9 +2,10 @@
 // index.html 的模块是studentApp，所以其他的模块必须注入到这个模块中
 var studentApp = angular.module('studentApp', ['ui.router','studCtrlMod']);
 //angularJS执行的第一个方法
-studentApp.run(function ($rootScope,$state) {
+studentApp.run(function ($rootScope,$state,$stateParams) {
     $rootScope.$state=$state;
-//    全局可以注入$state这个服务,其他页面不需要引入ui.router模块
+//    全局可以注入$state，$stateParams这个服务,其他的页面结构中都可以拿到该值
+    $rootScope.$stateParams=$stateParams
 });
 
 // 2.配置路由
@@ -17,7 +18,8 @@ studentApp.config(function ($stateProvider,$urlRouterProvider) {
     //    需要写一个login.html
     }).state('studList',{
     //    列表页为 studList
-        url:'/studList',
+        url:'/studList/{studSem:[0-9]{1,2}}',
+        //第二种传参  [0-9]{1,2}正则
         views:{
             '':{
                 templateUrl:'./templs/studList.html'
@@ -35,7 +37,7 @@ studentApp.config(function ($stateProvider,$urlRouterProvider) {
         url:'/studAdd',
         templateUrl:'./templs/studAdd.html'
     }).state('studDetail',{
-        url:'/studDetail',
+        url:'/studDetail/:studSem/:studId',
         templateUrl:'./templs/studDetail.html'
     })
 });
