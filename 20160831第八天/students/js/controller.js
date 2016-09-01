@@ -120,5 +120,31 @@ studCtrlMod.controller('gridCtrl',  ['$scope','$http','$stateParams',function ($
     }
 
 }]);
+studCtrlMod.controller('detailCtrl',['$scope','$stateParams','$http',function ($scope,$stateParams,$http) {
+//    $stateParams 有两个属性名
+    $http.get('./data/student'+$stateParams.studSem+'.json').success(function (data) {
+        $scope.students=angular.fromJson(data);
+        // $scope.students是数组
+        angular.forEach($scope.students,function (item) {
+            if(item.id ==$stateParams.studId){
+                // 判断数据的ID值是否和参数的一致
+                $scope.student = item;
+                // $scope.student 对象,需要展示到页面中的
+            }
+        })
+    })
+
+}]);
+
+studCtrlMod.controller('addCtrl',['$scope',function ($scope) {
+    $scope.save=function (s) {
+        $scope.student = s;
+        console.log($scope.student)
+    };
+//    $scope.student 是页面中需要保存数据的对象
+    $scope.reset=function () {
+        $scope.student = {};
+    }
+}]);
 
 
